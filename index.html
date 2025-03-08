@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="description" content="Jio Coin Calculator - Estimate your earnings with Jio Coin using daily usage hours and project future values with different growth scenarios." >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jio Coin Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jio Coin Calculator 💰</h1>
+        <label for="hours">Hours Used Per Day:</label>
+        <input type="number" id="hours" min="1" max="24" value="5">
+        <button onclick="calculateEarnings()">Calculate</button>
+        <table id="results">
+            <thead>
+                <tr>
+                    <th>Years 📅</th>
+                    <th>Total Coins 💸</th>
+                    <th>Low (5%) 💲</th>
+                    <th>Medium (25%) 💰</th>
+                    <th>High (100%) 🔥</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <canvas id="coinChart"></canvas>
+    </div>
+    <script>
+        function calculateEarnings() {
+            let hoursPerDay = parseFloat(document.getElementById('hours').value);
+            let monthlyCoins = hoursPerDay * 0.13 * 30;
+            let currentPrice = 100;
+            let tbody = document.querySelector('#results tbody');
+            tbody.innerHTML = '';
